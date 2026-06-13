@@ -8,6 +8,7 @@
 @import './features/contact/contact.css';
 @import './features/footer/footer.css';
 @import './features/scroll-reveal/scroll-reveal.css';
+@import './features/coming-soon/coming-soon.css';
 
 /* --- DESIGN TOKENS & VARIABLES --- */
 :root {
@@ -72,6 +73,16 @@ body {
   position: relative;
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 h1, h2, h3, h4, h5, h6 {

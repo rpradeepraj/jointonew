@@ -155,3 +155,19 @@ nav ul {
     backdrop-filter: blur(16px);
   }
 }
+
+/* Active Navigation Tabs */
+.nav-link.active-tab {
+  color: var(--text-primary);
+}
+.nav-link.active-tab::after {
+  width: 100%;
+}
+.nav-link.nav-highlight.active-tab::after {
+  background: var(--color-secondary);
+}
+.mobile-link.active-tab {
+  color: var(--text-primary);
+  padding-left: 0.5rem;
+}
+
