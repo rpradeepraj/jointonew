@@ -62,31 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* --- PROJECTS FILTER --- */
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filter = btn.getAttribute('data-filter');
-      
-      // Update active filter button
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      // Filter project cards
-      projectCards.forEach(card => {
-        const category = card.getAttribute('data-category');
-        if (filter === 'all' || category === filter || (filter === 'gis' && (category === 'gis' || category === 'enterprise'))) {
-          card.classList.remove('hidden');
-          // Re-trigger scroll reveal animation if visible
-          setTimeout(() => card.classList.add('active'), 50);
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    });
-  });
 
   /* --- PROJECT INQUIRY FORM SIMULATION --- */
   const projectForm = document.getElementById('project-form');
