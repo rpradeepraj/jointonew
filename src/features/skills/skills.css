@@ -1,0 +1,118 @@
+/* --- SKILLS SECTION --- */
+.skills-tabs-container {
+  overflow: hidden;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.skills-tabs-header {
+  display: flex;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.skills-tab {
+  flex: 1;
+  padding: 1.5rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.skills-tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.skills-tab.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: inset 0 -2px 0 var(--color-primary);
+}
+
+.skills-tab-content {
+  padding: 3rem;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.skill-pill {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition-fast);
+}
+
+.skill-pill:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+}
+
+.skill-lvl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  background: rgba(6, 182, 212, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .skills-tabs-header {
+    flex-wrap: wrap;
+  }
+  
+  .skills-tab {
+    flex: 1 1 50%;
+  }
+  
+  .skills-tab-content {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-tab {
+    flex: 1 1 100%;
+    border-bottom: 1px solid var(--border-glass);
+    padding: 1rem;
+  }
+  
+  .skills-tab.active {
+    box-shadow: inset 2px 0 0 var(--color-primary);
+  }
+  
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
