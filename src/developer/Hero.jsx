@@ -34,9 +34,9 @@ export default function Hero() {
               <span className="stat-num">6+</span>
               <span className="stat-lbl">Years Experience</span>
             </div>
-            <div class="stat-item">
-              <span class="stat-num">10+</span>
-              <span class="stat-lbl">Major Systems Delivered</span>
+            <div className="stat-item">
+              <span className="stat-num">10+</span>
+              <span className="stat-lbl">Major Systems Delivered</span>
             </div>
             <div className="stat-item">
               <span className="stat-num">2+</span>
