@@ -5,10 +5,14 @@ import '../features/hero/hero.css';
 export default function Hero({ profile }) {
   const staticInfo = portfolioData.personalInfo;
   
-  // Bind name, bio, and profile image dynamically to live GitHub profile
+  // Bind name and bio dynamically to live GitHub profile
   const name = profile && profile.name ? profile.name : staticInfo.name;
   const bio = profile && profile.bio ? profile.bio : staticInfo.bio;
-  const profileImg = profile && profile.avatar_url ? profile.avatar_url : staticInfo.profileImg;
+  
+  // Always use the local profile.jpg with correct prefix depending on env
+  const isProd = import.meta.env.PROD;
+  const profileImg = isProd ? '/jointonew/profile.jpg' : '/profile.jpg';
+  
   const { resumeUrl } = staticInfo;
 
   useEffect(() => {

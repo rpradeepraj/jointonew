@@ -11,6 +11,7 @@ export default function DevelopApp() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState('');
 
   useEffect(() => {
     if (window.lucide) {
@@ -37,17 +38,47 @@ export default function DevelopApp() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API request
+    // Map appType key to readable labels
+    const appTypeLabels = {
+      'mobile-app': 'React Native Mobile App',
+      'web-app': 'React.js Web Portal',
+      'gis-map': 'GIS & Map Solution',
+      'coldfusion': 'ColdFusion Backend Service',
+      'other': 'Other Software Engineering'
+    };
+
+    const readableAppType = appTypeLabels[formData.appType] || formData.appType || 'Custom Application';
+
+    // Construct the dynamic WhatsApp message details
+    const message = `Hello Pradeep! I'd like to initiate a freelance application development project.
+
+👤 Name: ${formData.name}
+📧 Email: ${formData.email}
+📱 App Type: ${readableAppType}
+📝 Description: ${formData.desc}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const link = `https://wa.me/918428402482?text=${encodedMessage}`;
+    setWhatsappUrl(link);
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        appType: '',
-        desc: ''
-      });
-    }, 1500);
+      
+      // Auto redirect to WhatsApp in a new tab
+      window.open(link, '_blank');
+    }, 1200);
+  };
+
+  const handleReset = () => {
+    setSubmitted(false);
+    setFormData({
+      name: '',
+      email: '',
+      appType: '',
+      desc: ''
+    });
+    setWhatsappUrl('');
   };
 
   return (
@@ -84,7 +115,7 @@ export default function DevelopApp() {
             <div className="cta-header">
               <i data-lucide="messages-square" className="cta-icon"></i>
               <h3>Get a Free Project Consultation</h3>
-              <p>Describe your app idea, and I'll get back to you with architectural ideas, timelines, and estimations.</p>
+              <p>Describe your app idea, and we will initialize a dynamic WhatsApp project chat containing all your configurations.</p>
             </div>
             
             {!submitted ? (
@@ -141,16 +172,38 @@ export default function DevelopApp() {
                   ></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary btn-full" disabled={isSubmitting}>
-                  <span className="btn-text">{isSubmitting ? 'Submitting...' : 'Submit Project Inquiry'}</span>
+                  <span className="btn-text">{isSubmitting ? 'Submitting...' : 'Initialize Project Checkout'}</span>
                   {isSubmitting && <span className="spinner"></span>}
                 </button>
               </form>
             ) : (
-              <div id="project-success" className="form-alert success">
-                <i data-lucide="check-circle-2"></i>
+              <div id="project-success" className="form-alert success" style={{ textAlign: 'left' }}>
+                <i data-lucide="check-circle-2" style={{ color: 'var(--color-success)' }}></i>
                 <div>
-                  <h4>Inquiry Received!</h4>
-                  <p>Thank you for reaching out. Pradeep Raj R will review your project details and contact you shortly.</p>
+                  <h4 style={{ marginBottom: '0.5rem' }}>Project Inquiry Initialized!</h4>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+                    Redirecting to WhatsApp to send your specifications. If the window didn't open or was blocked, please click the button below to connect with Pradeep Raj R.
+                  </p>
+                  
+                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                    <a 
+                      href={whatsappUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="btn btn-primary btn-small"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      Open WhatsApp Chat
+                    </a>
+                    
+                    <button 
+                      onClick={handleReset} 
+                      className="btn btn-secondary btn-small"
+                    >
+                      Fill New Form
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

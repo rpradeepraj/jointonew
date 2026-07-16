@@ -78,8 +78,11 @@ export default function App() {
 
       {!viewStore && <Header activeTab={activeTab} setActiveTab={setActiveTab} profile={profile} />}
       <main>
-        {activeTab === 'dev' ? (
-          <Developer profile={profile} />
+        {activeTab === 'home' ? (
+          <Developer profile={profile} onSelectStore={() => {
+            setActiveTab('product');
+            setViewStore(true);
+          }} />
         ) : activeTab === 'product' ? (
           viewStore ? (
             <StoreView onBack={() => setViewStore(false)} />

@@ -5,7 +5,12 @@ import '../features/navigation/navigation.css';
 export default function Header({ activeTab, setActiveTab, profile }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
-  const { resumeUrl } = portfolioData.personalInfo;
+  
+  // Resolve resume download link dynamically based on environment
+  const isProd = import.meta.env.PROD;
+  const resumeUrl = isProd 
+    ? `/jointonew/${portfolioData.personalInfo.resumeUrl}` 
+    : `/${portfolioData.personalInfo.resumeUrl}`;
   
   // Use live profile name if available, otherwise static name
   const name = profile && profile.name ? profile.name : portfolioData.personalInfo.name;
@@ -48,13 +53,9 @@ export default function Header({ activeTab, setActiveTab, profile }) {
     <>
       <header id="header" className={scrolled ? 'scrolled' : ''}>
         <div className="container header-container">
-          {activeTab === 'dev' ? (
-            <a href="#" className="logo" onClick={(e) => { e.preventDefault(); handleTabClick('home'); }}>
-              <span className="logo-glow">{firstName}</span> {lastName}
-            </a>
-          ) : (
-            <div className="logo-placeholder" style={{ width: '150px' }}></div>
-          )}
+          <a href="#" className="logo" onClick={(e) => { e.preventDefault(); handleTabClick('home'); }}>
+            <span className="logo-glow">{firstName}</span> {lastName}
+          </a>
           <nav id="nav-menu">
             <ul>
               <li>
@@ -93,19 +94,10 @@ export default function Header({ activeTab, setActiveTab, profile }) {
                   GitHub
                 </a>
               </li>
-              <li>
-                <a 
-                  href="#" 
-                  className={`nav-link nav-highlight ${activeTab === 'dev' ? 'active-tab' : ''}`}
-                  onClick={(e) => { e.preventDefault(); handleTabClick('dev'); }}
-                >
-                  Dev
-                </a>
-              </li>
             </ul>
           </nav>
           <div className="header-actions">
-            {activeTab === 'dev' && (
+            {activeTab === 'home' && (
               <a href={resumeUrl} download={resumeUrl} className="btn btn-secondary btn-small">
                 <i data-lucide="download"></i> Resume
               </a>
@@ -155,16 +147,7 @@ export default function Header({ activeTab, setActiveTab, profile }) {
               GitHub
             </a>
           </li>
-          <li>
-            <a 
-              href="#" 
-              className={`mobile-link mobile-highlight ${activeTab === 'dev' ? 'active-tab' : ''}`}
-              onClick={(e) => { e.preventDefault(); handleTabClick('dev'); }}
-            >
-              Dev
-            </a>
-          </li>
-          {activeTab === 'dev' && (
+          {activeTab === 'home' && (
             <li>
               <a href={resumeUrl} download={resumeUrl} className="btn btn-secondary btn-full mt-4" onClick={closeMenu}>
                 <i data-lucide="download"></i> Download Resume

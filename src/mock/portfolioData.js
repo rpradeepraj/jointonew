@@ -9,7 +9,7 @@ export const portfolioData = {
     linkedin: "https://linkedin.com/in/pradeepraj-r-739a7a168",
     linkedinDisplay: "linkedin.com/in/pradeepraj-r-739a7a168",
     resumeUrl: "Pradeep_Raj_Resume.pdf",
-    profileImg: "profile.jpg"
+    profileImg: "https://avatars.githubusercontent.com/u/44294362?v=4"
   },
   skillsData: [
     {
