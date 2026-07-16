@@ -11,6 +11,7 @@
 @import './features/coming-soon/coming-soon.css';
 @import './features/product/product.css';
 @import './features/product/ecommerce/store.css';
+@import './features/github/github.css';
 
 /* --- DESIGN TOKENS & VARIABLES --- */
 :root {

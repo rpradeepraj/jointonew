@@ -2,8 +2,14 @@ import React, { useEffect } from 'react';
 import { portfolioData } from '../mock/portfolioData';
 import '../features/hero/hero.css';
 
-export default function Hero() {
-  const { name, bio, profileImg, resumeUrl } = portfolioData.personalInfo;
+export default function Hero({ profile }) {
+  const staticInfo = portfolioData.personalInfo;
+  
+  // Bind name, bio, and profile image dynamically to live GitHub profile
+  const name = profile && profile.name ? profile.name : staticInfo.name;
+  const bio = profile && profile.bio ? profile.bio : staticInfo.bio;
+  const profileImg = profile && profile.avatar_url ? profile.avatar_url : staticInfo.profileImg;
+  const { resumeUrl } = staticInfo;
 
   useEffect(() => {
     if (window.lucide) {

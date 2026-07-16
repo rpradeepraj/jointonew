@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { portfolioData } from '../mock/portfolioData';
 import '../features/navigation/navigation.css';
 
-export default function Header({ activeTab, setActiveTab }) {
+export default function Header({ activeTab, setActiveTab, profile }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
-  const { name, resumeUrl } = portfolioData.personalInfo;
+  const { resumeUrl } = portfolioData.personalInfo;
+  
+  // Use live profile name if available, otherwise static name
+  const name = profile && profile.name ? profile.name : portfolioData.personalInfo.name;
 
   useEffect(() => {
     const handleScroll = () => {

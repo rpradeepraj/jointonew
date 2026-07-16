@@ -5,6 +5,7 @@ import Developer from './developer/Developer';
 import ComingSoon from './components/ComingSoon';
 import ProductSection from './components/ProductSection';
 import StoreView from './features/product/ecommerce/components/StoreView';
+import GithubSection from './features/github/GithubSection';
 
 
 // Global Scroll Reveal CSS
@@ -16,6 +17,23 @@ export default function App() {
     return params.get('tab') || 'home';
   });
   const [viewStore, setViewStore] = useState(false);
+  const [profile, setProfile] = useState(null);
+
+  // Fetch live profile details on mount
+  useEffect(() => {
+    async function fetchLiveProfile() {
+      try {
+        const res = await fetch("https://api.github.com/users/rpradeepraj");
+        if (res.ok) {
+          const data = await res.json();
+          setProfile(data);
+        }
+      } catch (err) {
+        console.warn("Failed to fetch live profile in App.jsx", err);
+      }
+    }
+    fetchLiveProfile();
+  }, []);
 
   useEffect(() => {
     if (activeTab !== 'product') {
@@ -58,21 +76,23 @@ export default function App() {
       <div className="bg-glow blob-2"></div>
       <div className="bg-glow blob-3"></div>
 
-      {!viewStore && <Header activeTab={activeTab} setActiveTab={setActiveTab} />}
+      {!viewStore && <Header activeTab={activeTab} setActiveTab={setActiveTab} profile={profile} />}
       <main>
         {activeTab === 'dev' ? (
-          <Developer />
+          <Developer profile={profile} />
         ) : activeTab === 'product' ? (
           viewStore ? (
             <StoreView onBack={() => setViewStore(false)} />
           ) : (
             <ProductSection onSelectStore={() => setViewStore(true)} />
           )
+        ) : activeTab === 'github' ? (
+          <GithubSection />
         ) : (
           <ComingSoon />
         )}
       </main>
-      {!viewStore && <Footer />}
+      {!viewStore && <Footer profile={profile} />}
     </>
   );
 }

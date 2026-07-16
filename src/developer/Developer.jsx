@@ -6,7 +6,7 @@ import Experience from './Experience';
 import DevelopApp from './DevelopApp';
 import Contact from './Contact';
 
-export default function Developer() {
+export default function Developer({ profile }) {
   useEffect(() => {
     // Initialize Scroll Reveal for elements in Developer section
     const reveals = document.querySelectorAll('.reveal, .timeline-item');
@@ -42,7 +42,7 @@ export default function Developer() {
 
   return (
     <>
-      <Hero />
+      <Hero profile={profile} />
       <About />
       <Skills />
       <Experience />
