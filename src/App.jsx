@@ -3,6 +3,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Developer from './developer/Developer';
 import ComingSoon from './components/ComingSoon';
+import ProductSection from './components/ProductSection';
+import StoreView from './features/product/ecommerce/components/StoreView';
+
 
 // Global Scroll Reveal CSS
 import './features/scroll-reveal/scroll-reveal.css';
@@ -12,6 +15,13 @@ export default function App() {
     const params = new URLSearchParams(window.location.search);
     return params.get('tab') || 'home';
   });
+  const [viewStore, setViewStore] = useState(false);
+
+  useEffect(() => {
+    if (activeTab !== 'product') {
+      setViewStore(false);
+    }
+  }, [activeTab]);
 
   useEffect(() => {
     // Initialize Lucide Icons on mount and tab switch
@@ -48,15 +58,21 @@ export default function App() {
       <div className="bg-glow blob-2"></div>
       <div className="bg-glow blob-3"></div>
 
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+      {!viewStore && <Header activeTab={activeTab} setActiveTab={setActiveTab} />}
       <main>
         {activeTab === 'dev' ? (
           <Developer />
+        ) : activeTab === 'product' ? (
+          viewStore ? (
+            <StoreView onBack={() => setViewStore(false)} />
+          ) : (
+            <ProductSection onSelectStore={() => setViewStore(true)} />
+          )
         ) : (
           <ComingSoon />
         )}
       </main>
-      <Footer />
+      {!viewStore && <Footer />}
     </>
   );
 }

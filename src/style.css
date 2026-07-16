@@ -9,6 +9,8 @@
 @import './features/footer/footer.css';
 @import './features/scroll-reveal/scroll-reveal.css';
 @import './features/coming-soon/coming-soon.css';
+@import './features/product/product.css';
+@import './features/product/ecommerce/store.css';
 
 /* --- DESIGN TOKENS & VARIABLES --- */
 :root {
